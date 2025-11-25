@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Guardian - Roadside Assistance India</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-road"></i>
+            <span>Travel Guardian</span>
+        </div>
+        <div class="emergency-call">
+            <a href="tel:1800-XXX-XXXX" class="emergency-btn">
+                <i class="fas fa-phone-alt"></i>
+                Emergency: 1800-XXX-XXXX
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Navigation - Service Buttons -->
+    <nav class="service-nav">
+        <div class="service-buttons">
+            <button class="service-btn active" data-service="tire">
+                <i class="fas fa-tire"></i>
+                <span>Tire Puncture</span>
+            </button>
+            <button class="service-btn" data-service="tow">
+                <i class="fas fa-truck-pickup"></i>
+                <span>Need Tow</span>
+            </button>
+            <button class="service-btn" data-service="battery">
+                <i class="fas fa-car-battery"></i>
+                <span>Battery Jump</span>
+            </button>
+            <button class="service-btn" data-service="fuel">
+                <i class="fas fa-gas-pump"></i>
+                <span>Fuel Delivery</span>
+            </button>
+            <button class="service-btn" data-service="lockout">
+                <i class="fas fa-key"></i>
+                <span>Locked Out</span>
+            </button>
+            <button class="service-btn" data-service="mechanic">
+                <i class="fas fa-wrench"></i>
+                <span>Mechanic</span>
+            </button>
+            <button class="service-btn" data-service="accident">
+                <i class="fas fa-car-crash"></i>
+                <span>Accident Help</span>
+            </button>
+            <button class="service-btn" data-service="other">
+                <i class="fas fa-ellipsis-h"></i>
+                <span>Other</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Location Banner -->
+    <div class="location-banner">
+        <div class="location-info">
+            <i class="fas fa-map-marker-alt"></i>
+            <span id="current-location">Detecting your location...</span>
+        </div>
+        <button id="refresh-location" class="refresh-btn">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Map Section -->
+        <section class="map-section">
+            <div id="map-container">
+                <div id="map-placeholder" class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p>Loading map...</p>
+                </div>
+                <iframe id="google-map" style="display: none;"></iframe>
+            </div>
+        </section>
+
+        <!-- Service Providers List -->
+        <section class="providers-section">
+            <div class="section-header">
+                <h2 id="service-title">Tire Puncture Services Nearby</h2>
+                <div class="filter-options">
+                    <select id="sort-by">
+                        <option value="distance">Sort by Distance</option>
+                        <option value="rating">Sort by Rating</option>
+                        <option value="price">Sort by Price</option>
+                    </select>
+                </div>
+            </div>
+            <div id="providers-list" class="providers-list">
+                <!-- Providers will be loaded dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Provider Detail Modal -->
+    <div id="provider-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('provider-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="provider-detail">
+                <!-- Provider details will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal">
+        <div class="modal-content payment-modal-content">
+            <button class="modal-close" onclick="closeModal('payment-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="payment-header">
+                <h2><i class="fas fa-shield-alt"></i> Secure Payment</h2>
+                <p>Complete your booking</p>
+            </div>
+            <div id="payment-content">
+                <!-- Payment content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Confirmation Modal -->
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content confirmation-modal-content">
+            <div class="confirmation-content">
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Booking Confirmed!</h2>
+                <p id="confirmation-message">Your service request has been confirmed.</p>
+                <div id="booking-details" class="booking-details">
+                    <!-- Booking details will be loaded dynamically -->
+                </div>
+                <div class="confirmation-actions">
+                    <button class="btn btn-primary" onclick="trackProvider()">
+                        <i class="fas fa-map-marker-alt"></i> Track Provider
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeModal('confirmation-modal')">
+                        <i class="fas fa-home"></i> Back to Home
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Travel Guardian. Your trusted roadside assistance partner in India.</p>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
